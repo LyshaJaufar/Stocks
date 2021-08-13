@@ -1,4 +1,5 @@
 import requests, math,json,csv
+import pandas as pd
 
 class Stock:
     def __init__(self, symbol, date):
@@ -6,6 +7,8 @@ class Stock:
         self.symbol = str(symbol)
         self.date = date
         self.alphavantage_api_key = "EHYOFYX5N9729SP3"
+
+        self.file = open('daily_data.csv', 'w', newline="")
 
         # Get daily data
         #self.daily_data = self.get_daily_data()
@@ -19,8 +22,21 @@ class Stock:
             return False
         
         # Get data from json of successful request
-        return r.json()["Time Series (Daily)"]
+        response_dict = r.json()
+        _, header = r.json()
 
+        # Convert to pandas dataframe
+        df = pd.DataFrame.from_dict(response_dict[header])
+
+        # Write to csv file
+        fieldnames = ['Date','Open','Low','Close', 'Volume']
+        csvWriter = csv.DictWriter(self.file, fieldnames=fieldnames)
+        csvWriter.writeheader()
+
+        df.T.to_csv(self.file, header=False)
+
+        df = pd.DataFrame.from_dict(response_dict[header], orient='index')
+        return df
 
     def get_current_price(self):
         # Get current price of stock (realtime)
@@ -44,12 +60,6 @@ class Stock:
         return data.json()["Technical Analysis: SMA"][self.date]["SMA"]
 
 if __name__ == '__main__':
-    #stock = Stock("GOOG", "2021-08-11")
-    stock = Stock("IBM", "2021-08-12")
-    stock1 = Stock("MSFT", "2021-08-12")
-    stock2 = Stock("TSLA", "2021-08-12")
-    print(stock.get_moving_average(200), stock1.get_moving_average(200), stock2.get_moving_average(200))
-
-    
-
-
+    stock = Stock("MSFT", "2021-08-12")
+    print(stock.get_daily_data())
+    stock.file.close()
