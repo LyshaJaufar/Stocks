@@ -1,4 +1,4 @@
-import os, requests, math,json,csv
+import requests, math,json,csv
 
 class Stock:
     def __init__(self, symbol, date):
@@ -46,7 +46,9 @@ class Stock:
 if __name__ == '__main__':
     #stock = Stock("GOOG", "2021-08-11")
     stock = Stock("IBM", "2021-08-12")
-    print(stock.get_moving_average(200))
+    stock1 = Stock("MSFT", "2021-08-12")
+    stock2 = Stock("TSLA", "2021-08-12")
+    print(stock.get_moving_average(200), stock1.get_moving_average(200), stock2.get_moving_average(200))
 
     
 

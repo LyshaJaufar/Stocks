@@ -26,6 +26,6 @@ class Portfolio:
         return self.value
 
 if __name__ == '__main__':
-    p = Portfolio([Position("AAPL", 13, 73.95), Position("GOOG", 10, 133.93), Position("IBM", 5, 32.39)])
+    p = Portfolio([Position("TSLA", 2, 722.25), Position("MSFT", 5, 289.81), Position("IBM", 5, 143.07)])
     print(p.total_cost())
     print(p.current_value())
