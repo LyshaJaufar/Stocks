@@ -55,11 +55,10 @@ class Stock:
         r = requests.get(request_url)
         if r.status_code != 200:
             return False
-
+                                                                                                                                                                                                                                                                                                                                    
         data = requests.get(request_url)
         return data.json()["Technical Analysis: SMA"][self.date]["SMA"]
 
 if __name__ == '__main__':
     stock = Stock("MSFT", "2021-08-12")
-    print(stock.get_daily_data())
-    stock.file.close()
+    print(stock.get_moving_average(60))
