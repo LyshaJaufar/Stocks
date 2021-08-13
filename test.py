@@ -61,13 +61,13 @@ class Stock:
     def plot_SMA(self, timeperiod):
         data_ts, meta_data_ts = self.time_series.get_intraday(symbol=self.symbol, interval='1min', outputsize='full')
         data_ti, meta_data_ti = self.tech_indicators.get_sma(symbol=self.symbol, interval='daily',
-                                            time_period=timeperiod, series_type='low')
+                                            time_period=timeperiod, series_type='close')
         
         df1 = data_ti
         df2 = data_ts['4. close'].iloc[timeperiod-1::]
-        df2.index = df1.index
 
-        total_df = pd.concat([df1, df2], axis=1)
+
+        total_df = pd.concat([df1], axis=1)
         total_df.plot()
         plt.show()
 
