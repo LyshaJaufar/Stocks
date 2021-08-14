@@ -5,7 +5,7 @@ class Position:
         self.symbol = symbol
         self.quantity = quantity
         self.avg_price = avg_price
-        self.stock = Stock(symbol, "2021-08-11")
+        self.stock = Stock(symbol, "2021-08-13")
 
     def open_pnl(self):
         # (current price - purchase price) x (number of outstanding shares purchased today)

@@ -1,4 +1,4 @@
-from position import Position
+from position_v1 import Position
 
 class Portfolio:
     def __init__(self, positions):

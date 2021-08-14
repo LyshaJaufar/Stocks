@@ -21,6 +21,7 @@ class Stock:
         self.moving_average = self.get_moving_average(60)
 
         self.SMA_data = None
+        self.price_data = None
 
     def get_daily_data(self):
         # Get daily prices of stock for past 200 days
@@ -60,7 +61,9 @@ class Stock:
         self.SMA_data = data_ti
         return float(data_ti['SMA'][-1])
 
+    def get_daily_closing_price(self):
+        data_ts, meta_data_ts = self.time_series.get_daily(symbol=self.symbol, outputsize='full')
+        self.price_data = data_ts['4. close']
 
 if __name__ == '__main__':
-    stock = Stock("MSFT", "2021-08-12")
-    print(stock.plot_SMA(60))
+    stock = Stock("IBM", "2021-08-13")
