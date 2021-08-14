@@ -45,7 +45,10 @@ class MovingAverage():
         elif (fifty_day_average < two_hundred_day_average):
             return -1
         else:
-            return 0 
+            return 0
+
+    def compare_two_hundred_and_fifty(self):
+        pass 
 
 if __name__ == '__main__':
     strategy = MovingAverage()

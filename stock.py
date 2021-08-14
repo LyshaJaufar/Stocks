@@ -51,7 +51,7 @@ class Stock:
             return float(value["4. close"])
 
     def get_moving_average(self, timeperiod):
-        request_url = "https://www.alphavantage.co/query?function=SMA&symbol={0}&interval=daily&time_period={1}&series_type=low&apikey={2}".format(self.symbol, timeperiod, self.alphavantage_api_key)
+        request_url = "https://www.alphavantage.co/query?function=SMA&symbol={0}&interval=daily&time_period={1}&series_type=close&apikey={2}".format(self.symbol, timeperiod, self.alphavantage_api_key)
         r = requests.get(request_url)
         if r.status_code != 200:
             return False
@@ -60,5 +60,5 @@ class Stock:
         return data.json()["Technical Analysis: SMA"][self.date]["SMA"]
 
 if __name__ == '__main__':
-    stock = Stock("MSFT", "2021-08-12")
-    print(stock.get_moving_average(60))
+    stock = Stock("MSFT", "2021-05-27")
+    print(stock.get_moving_average(200))

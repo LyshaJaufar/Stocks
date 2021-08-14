@@ -20,8 +20,7 @@ class MovingAverage():
 if __name__ == '__main__':
     strategy = MovingAverage()
     stock = Stock("IBM", "2021-08-12")
-    #stock1 = Stock("MSFT", "2021-08-12")
-    #stock2 = Stock("TSLA", "2021-08-12")
+
     decision = strategy.decision(stock)
 
     print(decision)
