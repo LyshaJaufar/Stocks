@@ -26,7 +26,7 @@ class MovingAverage():
         fifty_day_average = stock.get_moving_average(50)
         plot_fifty = stock.SMA_data
 
-        price = stock.price_data.iloc
+        price = stock.price_data.iloc[0::]
 
         total_df = pd.concat([plot_two_hundred, plot_fifty, price], axis=1)
         total_df.plot()
@@ -37,7 +37,7 @@ class MovingAverage():
         legend.get_texts()[1].set_text('SMA 50')
         legend.get_texts()[2].set_text('price')
 
-        plt.savefig('v1\SMA1.png')
+        plt.savefig('v1\SMA2.png')
         plt.show()
 
         if (fifty_day_average > two_hundred_day_average):
