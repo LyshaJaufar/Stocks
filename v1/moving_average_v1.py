@@ -1,8 +1,7 @@
 import pandas as pd
-from alpha_vantage.timeseries import TimeSeries
 from alpha_vantage.techindicators import TechIndicators
 import matplotlib.pyplot as plt
-from test import Stock
+from stock_v1 import Stock
 
 
 class MovingAverage():
@@ -25,6 +24,7 @@ class MovingAverage():
         legend.get_texts()[0].set_text('SMA 200')
         legend.get_texts()[1].set_text('SMA 50')
 
+        plt.savefig('SMA.png')
         plt.show()
 
         if (fifty_day_average > two_hundred_day_average):
