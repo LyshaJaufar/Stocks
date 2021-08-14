@@ -57,7 +57,7 @@ class Stock:
 
     def get_moving_average(self, timeperiod):
         data_ti, meta_data_ti = self.tech_indicators.get_sma(symbol=self.symbol, interval='daily',
-                                            time_period=timeperiod, series_type='low')
+                                            time_period=timeperiod, series_type='close')
         self.SMA_data = data_ti
         return float(data_ti['SMA'][-1])
 

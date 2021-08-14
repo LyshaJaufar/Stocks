@@ -18,7 +18,7 @@ class MovingAverage():
         # uptrend to downtrend --> sell
 
         stock.get_daily_closing_price()
-        price = stock.price_data.iloc[50-1::]
+        
    
         two_hundred_day_average = stock.get_moving_average(200)
         plot_two_hundred = stock.SMA_data
@@ -26,7 +26,7 @@ class MovingAverage():
         fifty_day_average = stock.get_moving_average(50)
         plot_fifty = stock.SMA_data
 
-        price = stock.price_data.iloc[50-1::]
+        price = stock.price_data.iloc
 
         total_df = pd.concat([plot_two_hundred, plot_fifty, price], axis=1)
         total_df.plot()
@@ -37,7 +37,7 @@ class MovingAverage():
         legend.get_texts()[1].set_text('SMA 50')
         legend.get_texts()[2].set_text('price')
 
-        plt.savefig('v1\SMA.png')
+        plt.savefig('v1\SMA1.png')
         plt.show()
 
         if (fifty_day_average > two_hundred_day_average):
