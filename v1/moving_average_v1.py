@@ -37,7 +37,7 @@ class MovingAverage():
         legend.get_texts()[1].set_text('SMA 50')
         legend.get_texts()[2].set_text('price')
 
-        plt.savefig('v1\SMA2.png')
+        plt.savefig('v1\SMA.png')
         plt.show()
 
         if (fifty_day_average > two_hundred_day_average):
