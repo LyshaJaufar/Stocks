@@ -67,6 +67,8 @@ class Stock:
     def get_daily_closing_price(self):
         data_ts, meta_data_ts = self.time_series.get_daily(symbol=self.symbol, outputsize='full')
         self.price_data = data_ts['4. close']
+        
+        return self.price_data
 
 if __name__ == '__main__':
     stock = Stock("IBM", "2021-08-13")

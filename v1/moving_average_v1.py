@@ -28,6 +28,7 @@ class MovingAverage():
         # uptrend to downtrend --> sell
 
         self.current_prices = stock.get_daily_closing_price()
+        print(self.current_prices)
         
    
         two_hundred_day_average = stock.get_moving_average(200)
@@ -63,7 +64,8 @@ class MovingAverage():
         self.SMA_50 
         self.SMA_200  
 
-        for (key50, value50), (key200, value200), (keyPrice, valuePrice) in zip(self.SMA_50.items(), self.SMA_200.items(), self.current_prices.items()):
+
+        for (key50, value50), (key200, value200), (keyPrice, valuePrice) in zip(self.SMA_50.items(), self.SMA_200.items(), self.current_prices[::-1].items()):
             if value200 > value50: # sell point
                 self.total_shares //= 2
                 self.temp_value += float(self.total_shares * valuePrice)
@@ -74,7 +76,7 @@ class MovingAverage():
             if value50 > value200:  # buy point
                 new_shares = self.total_value // valuePrice
                 self.total_shares += new_shares
-                
+
                 print(f'buy: {value50}')
                 self.price += value50
 
