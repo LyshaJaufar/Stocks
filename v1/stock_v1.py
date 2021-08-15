@@ -16,12 +16,14 @@ class Stock:
 
         self.file = open('daily_data.csv', 'w', newline='')
 
-        self.daily_data = self.get_daily_data()
-        self.current_price = self.get_current_price()
-        self.moving_average = self.get_moving_average(60)
+        # self.daily_data = self.get_daily_data()
+        # self.current_price = self.get_current_price()
+        # self.moving_average = self.get_moving_average(60)
 
         self.SMA_data = None
         self.price_data = None
+
+        self.SMA_values = None
 
     def get_daily_data(self):
         # Get daily prices of stock for past 200 days
@@ -59,6 +61,7 @@ class Stock:
         data_ti, meta_data_ti = self.tech_indicators.get_sma(symbol=self.symbol, interval='daily',
                                             time_period=timeperiod, series_type='close')
         self.SMA_data = data_ti
+        self.SMA_values = data_ti['SMA']
         return float(data_ti['SMA'][-1])
 
     def get_daily_closing_price(self):
@@ -67,3 +70,10 @@ class Stock:
 
 if __name__ == '__main__':
     stock = Stock("IBM", "2021-08-13")
+    test = (stock.get_moving_average(200))
+    test2 = (stock.get_moving_average(50))
+
+
+
+
+
