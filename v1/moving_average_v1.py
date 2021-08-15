@@ -64,15 +64,18 @@ class MovingAverage():
         self.SMA_50 
         self.SMA_200  
 
+        test = self.current_prices[-50::-1]
+        testt = self.current_prices[-2::-1]
+        testtt = self.current_prices[0::-1]
 
-        for (key50, value50), (key200, value200), (keyPrice, valuePrice) in zip(self.SMA_50.items(), self.SMA_200.items(), self.current_prices[::-1].items()):
+        for (key50, value50), (key200, value200), (keyPrice, valuePrice) in zip(self.SMA_50.items(), self.SMA_200.items(), self.current_prices[2::-1].items()):
+            print(valuePrice)
             if value200 > value50: # sell point
                 self.total_shares //= 2
                 self.temp_value += float(self.total_shares * valuePrice)
                 
                 self.total_value = self.temp_value - self.invested
                 print(f'sell {value200}') 
-                self.price 
             if value50 > value200:  # buy point
                 new_shares = self.total_value // valuePrice
                 self.total_shares += new_shares
