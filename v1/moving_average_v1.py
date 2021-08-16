@@ -8,7 +8,7 @@ class MovingAverage():
     def __init__(self, quantity, avg_price):
         self.invested = float(float(avg_price) * quantity)
         self.temp_value = 0
-        self.total_value = 0
+        self.profit = 0
         self.total_shares = quantity
 
         self.SMA_50 = None
@@ -61,27 +61,27 @@ class MovingAverage():
             return 0
 
     def compare_two_hundred_and_fifty(self):
-        self.SMA_50 
-        self.SMA_200  
+        sell = False
 
         for (key50, value50), (key200, value200), (keyPrice, valuePrice) in zip(self.SMA_50.items(), self.SMA_200.items(), self.current_prices[-50::-1].items()):                                                                                                                           
-            if value200 > value50: # sell point
-                self.total_shares //= 2
-                self.temp_value += float(self.total_shares * valuePrice)
-                
-                self.total_value = self.temp_value - self.invested
-                print(f'sell {value200}') 
+            if value200 > value50 and sell == False: # sell point
+                current_value = self.total_shares * valuePrice
+                shares_sold = self.total_shares // 2
+                self.total_shares -= shares_sold
+
+                revenue = (shares_sold * valuePrice)
+                sell = True
+
             if value50 > value200:  # buy point
-                new_shares = self.total_value // valuePrice
+                new_shares = revenue // valuePrice
                 self.total_shares += new_shares
 
-                print(f'buy: {value50}')
-                self.price += value50
+                current_value = self.total_shares * valuePrice
+                sell = False
 
-            else: print('hold')
 
 if __name__ == '__main__':
-    strategy = MovingAverage(10, '65.0863')
+    strategy = MovingAverage(10, '116.0')
     stock = Stock("IBM", "2021-08-12")
     decision = strategy.decision(stock)
     strategy.compare_two_hundred_and_fifty()
