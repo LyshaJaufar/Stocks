@@ -38,18 +38,16 @@ class MovingAverage():
         plot_fifty = stock.SMA_data
         self.SMA_50 = stock.SMA_values
 
-        print("two hundred: ", plot_two_hundred)
-        print("fifty: ", plot_fifty)
-
         price = stock.price_data.iloc[0::]
 
-        total_df = pd.concat([plot_two_hundred, price], axis=1)
+        total_df = pd.concat([plot_two_hundred, plot_fifty, price], axis=1)
         total_df.plot()
 
         # Set legend
         legend = plt.legend()
         legend.get_texts()[0].set_text('SMA 200')
         legend.get_texts()[1].set_text('SMA 50')
+        legend.get_texts()[2].set_text('Prices')
 
 
         plt.savefig('v1\SMA.png')
@@ -61,8 +59,6 @@ class MovingAverage():
             return -1
         else:
             return 0
-
-
 
 
 if __name__ == '__main__':
