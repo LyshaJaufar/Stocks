@@ -62,28 +62,7 @@ class MovingAverage():
         else:
             return 0
 
-    def compare_two_hundred_and_fifty(self):
-        sell = False
-        bought = False
 
-        for (key50, value50), (key200, value200), (keyPrice, valuePrice) in zip(self.SMA_50.items(), self.SMA_200.items(), self.current_prices[-50::-1].items()):                                                                                                                           
-            print(keyPrice)      
-            if keyPrice == "2000-01-11 00:00:00":           
-                if value200 > value50 and sell == False: # sell point                                                                                               
-                    current_value = self.total_shares * valuePrice
-                    shares_sold = self.total_shares // 2
-                    self.total_shares -= shares_sold
-
-                    revenue = (shares_sold * valuePrice)
-                    sell = True
-
-                if value50 > value200 and bought == False:  # buy point
-                    new_shares = revenue // valuePrice
-                    self.total_shares += new_shares
-
-                    current_value = self.total_shares * valuePrice
-                    sell = False
-                    bought = True
 
 
 if __name__ == '__main__':
