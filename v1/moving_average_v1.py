@@ -30,7 +30,6 @@ class MovingAverage():
         self.current_prices = stock.get_daily_closing_price()
         print(self.current_prices)
         
-   
         two_hundred_day_average = stock.get_moving_average(200)
         plot_two_hundred = stock.SMA_data
         self.SMA_200 = stock.SMA_values
@@ -39,16 +38,19 @@ class MovingAverage():
         plot_fifty = stock.SMA_data
         self.SMA_50 = stock.SMA_values
 
+        print("two hundred: ", plot_two_hundred)
+        print("fifty: ", plot_fifty)
+
         price = stock.price_data.iloc[0::]
 
-        total_df = pd.concat([plot_two_hundred, plot_fifty, price], axis=1)
+        total_df = pd.concat([plot_two_hundred, price], axis=1)
         total_df.plot()
 
         # Set legend
         legend = plt.legend()
         legend.get_texts()[0].set_text('SMA 200')
         legend.get_texts()[1].set_text('SMA 50')
-        legend.get_texts()[2].set_text('price')
+
 
         plt.savefig('v1\SMA.png')
         plt.show()
@@ -62,22 +64,26 @@ class MovingAverage():
 
     def compare_two_hundred_and_fifty(self):
         sell = False
+        bought = False
 
         for (key50, value50), (key200, value200), (keyPrice, valuePrice) in zip(self.SMA_50.items(), self.SMA_200.items(), self.current_prices[-50::-1].items()):                                                                                                                           
-            if value200 > value50 and sell == False: # sell point
-                current_value = self.total_shares * valuePrice
-                shares_sold = self.total_shares // 2
-                self.total_shares -= shares_sold
+            print(keyPrice)      
+            if keyPrice == "2000-01-11 00:00:00":           
+                if value200 > value50 and sell == False: # sell point                                                                                               
+                    current_value = self.total_shares * valuePrice
+                    shares_sold = self.total_shares // 2
+                    self.total_shares -= shares_sold
 
-                revenue = (shares_sold * valuePrice)
-                sell = True
+                    revenue = (shares_sold * valuePrice)
+                    sell = True
 
-            if value50 > value200:  # buy point
-                new_shares = revenue // valuePrice
-                self.total_shares += new_shares
+                if value50 > value200 and bought == False:  # buy point
+                    new_shares = revenue // valuePrice
+                    self.total_shares += new_shares
 
-                current_value = self.total_shares * valuePrice
-                sell = False
+                    current_value = self.total_shares * valuePrice
+                    sell = False
+                    bought = True
 
 
 if __name__ == '__main__':
